@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu avec Sous-menus</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #696969;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+        }
+        .menu {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            background-color: #333;
+        }
+        .menu ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+        }
+        .menu ul li {
+            margin-right: 20px;
+            position: relative;
+        }
+        .menu ul li a {
+            color: #fff;
+            text-decoration: none;
+            padding: 10px;
+            display: block;
+        }
+        .submenu {
+            display: none;
+            position: absolute;
+            background-color: #333;
+            min-width: 150px;
+            z-index: 1;
+        }
+        .submenu a {
+            padding: 10px;
+            display: block;
+            color: #fff;
+            text-decoration: none;
+        }
+        .menu ul li:hover .submenu {
+            display: block;
+        }
+        .content {
+            text-align: center; 
+            margin-top: 250px; 
+        }
+        h1 {
+            font-size: 36px;
+        }
+    </style>
+</head>
+<body>
+    <div class="menu">
+        <ul>
+            <li><a href="#">Accueil</a></li>
+            <li>
+                <a href="#">Formation Professionnelle</a>
+                <div class="submenu">
+                    <a href="Finance.jsp">Finance et comptabilité</a>
+                    <a href="#">Boulangerie et pâtisserie</a>
+                </div>
+            </li>
+            <li>
+                <a href="#">Formation Continue</a>
+                <div class="submenu">
+                    <a href="#">Langues</a>
+                    <a href="#">Informatique</a>
+                </div>
+            </li>
+            <li><a href="#">Compte</a></li>
+            <li style="margin-left: 600px;"><a href="#">Déconnexion</a></li>
+        </ul>
+    </div>
+
+    <div class="content">
+        <h1>Bienvenue dans votre espace</h1>
+    </div>
+</body>
+</html>
+
+
