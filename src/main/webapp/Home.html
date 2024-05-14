@@ -74,11 +74,11 @@
             <li>
                 <a href="#">Formation Continue</a>
                 <div class="submenu">
-                    <a href="#">Langues</a>
+                    <a href="Langues.jsp">Langues</a>
                     <a href="#">Informatique</a>
                 </div>
             </li>
-            <li><a href="#">Compte</a></li>
+            <li><a href="Compte.jsp">Compte</a></li>
             <li style="margin-left: 600px;"><a href="#">Déconnexion</a></li>
         </ul>
     </div>
@@ -86,6 +86,19 @@
     <div class="content">
         <h1>Bienvenue dans votre espace</h1>
     </div>
+      <script>
+        // Function to display an alert if the password was changed successfully
+        function displayAlertIfPasswordChanged() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const success = urlParams.get('success');
+            if (success === 'true') {
+                alert('Le mot de passe a été changé avec succès.');
+            }
+        }
+
+        // Call the function when the page loads
+        window.onload = displayAlertIfPasswordChanged;
+    </script>
 </body>
 </html>
 
