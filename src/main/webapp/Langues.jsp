@@ -53,11 +53,14 @@
         <h1>Langues</h1>
         <form action="Ajout_langues.jsp" method="POST">
             <button type="submit" class="button">Nouveau</button>
+        </form>
+        <form action="Langues.jsp" method="POST">
             <input style="margin-left: 800px;" type="text" id="searchField" name="searchField" placeholder="Rechercher...">
             <button type="submit" class="button">Rechercher</button>
             <br><br><br>
         </form>
         
+
         <table id="languesTable">
             <thead>
                 <tr>
@@ -78,23 +81,18 @@
                 try {
                     Class.forName("com.mysql.cj.jdbc.Driver");
                     Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/sfe", "root", "");
-
                     String searchTerm = request.getParameter("searchField");
                     String sql = "SELECT ordre, CODE, Nom_Complet, Date_inscription, Date_debut, langue, Prix FROM langues ";
-
                     if (searchTerm != null && !searchTerm.isEmpty()) {
                         sql += "WHERE Nom_Complet LIKE ?";
                     }
                     
                     sql += " ORDER BY ordre";
                     PreparedStatement pstmt = conn.prepareStatement(sql);
-
                     if (searchTerm != null && !searchTerm.isEmpty()) {
                         pstmt.setString(1, "%" + searchTerm + "%");
                     }
-
                     ResultSet rs = pstmt.executeQuery();
-
                     while (rs.next()) {
                     	int ordre = rs.getInt("ordre");
                         String CODE = rs.getString("CODE");
@@ -134,14 +132,11 @@
         function supprimer(code) {
             const xhr = new XMLHttpRequest();
             const url = '/Gestion_de_cours_soutien/LanguesDeleteServlet'; // URL de votre servlet
-
             // Préparer les données à envoyer
             const params = new URLSearchParams();
             params.append('code', code);
-
             xhr.open('POST', url, true);
             xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-
             // Gérer la réponse de la requête
             xhr.onload = function() {
                 if (xhr.status >= 200 && xhr.status < 400) {
@@ -161,13 +156,11 @@
                     // Afficher un message d'erreur général en cas d'échec de la requête
                 }
             };
-
             // Gérer les erreurs réseau
             xhr.onerror = function() {
                 console.error('Erreur de réseau lors de la requête');
                 // Afficher un message d'erreur en cas d'échec de la requête réseau
             };
-
             // Envoyer la requête avec les paramètres
             xhr.send(params);
         }
