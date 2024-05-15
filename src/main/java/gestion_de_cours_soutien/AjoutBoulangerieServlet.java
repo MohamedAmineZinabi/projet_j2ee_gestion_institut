@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/AjoutFinanceServlet")
+@WebServlet("/AjoutBoulangerieServlet")
 public class AjoutBoulangerieServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     static {
@@ -90,13 +90,13 @@ public class AjoutBoulangerieServlet extends HttpServlet {
                 preparedStatement.executeUpdate();
             }
 
-            response.sendRedirect("Boulagerie.jsp"); // Rediriger vers une page de succès
+            response.sendRedirect("Boulagerie.jsp"); // Rediriger vers une page de succÃ¨s
 
         } catch (SQLException ex) {
             ex.printStackTrace();
-            response.sendRedirect("Ajout_boulangerie.jsp"); // Rediriger vers une page d'erreur générale
+            response.sendRedirect("Ajout_boulangerie.jsp"); // Rediriger vers une page d'erreur gÃ©nÃ©rale
         } finally {
-            // Fermer la connexion dans le bloc finally pour s'assurer qu'elle est toujours fermée
+            // Fermer la connexion dans le bloc finally pour s'assurer qu'elle est toujours fermÃ©e
             if (connection != null) {
                 try {
                     connection.close();
@@ -120,7 +120,7 @@ public class AjoutBoulangerieServlet extends HttpServlet {
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
-            // Gérer l'erreur de base de données ici, par exemple afficher un message d'erreur
+            // GÃ©rer l'erreur de base de donnÃ©es ici, par exemple afficher un message d'erreur
         }
 
         return false;
