@@ -40,7 +40,7 @@ public class CompteServlet extends HttpServlet {
             if (verifierAncienMotDePasse(ancienMotDePasse)) {
                 System.out.println("Ancien mot de passe correct.");
                 if (changerMotDePasseDansBaseDeDonnees(nouveauMotDePasse)) {
-                    System.out.println("Mot de passe changé avec succès.");
+                    System.out.println("Mot de passe changï¿½ avec succï¿½s.");
                     // Password changed successfully
                     response.sendRedirect("Home.html?success=true");
                 } else {
@@ -51,8 +51,8 @@ public class CompteServlet extends HttpServlet {
                 }
             } else {
                 // Incorrect old password
-                System.out.println("Mot de passe incorrect. Veuillez réessayer.");
-                request.setAttribute("errorMessage", "Mot de passe incorrect. Veuillez réessayer.");
+                System.out.println("Mot de passe incorrect. Veuillez rÃ©essayer.");
+                request.setAttribute("errorMessage", "Mot de passe incorrect. Veuillez rï¿½essayer.");
                 request.getRequestDispatcher("Compte.jsp").forward(request, response);
             }
         } else {
@@ -69,22 +69,22 @@ public class CompteServlet extends HttpServlet {
         String password = "";
 
         try (Connection connection = DriverManager.getConnection(connectionStr, username, password);
-             PreparedStatement statement = connection.prepareStatement("SELECT password FROM compte WHERE user = ?")) {
+             PreparedStatement statement = connection.prepareStatement("SELECT password FROM conn WHERE user = ?")) {
             statement.setString(1, "admin"); // Assuming 'admin' is the user for whom password is being verified
 
             try (ResultSet resultSet = statement.executeQuery()) {
                 if (resultSet.next()) {
                     String motDePasseBD = resultSet.getString("password");
 
-                    // Comparer le mot de passe de la base de données avec l'ancien mot de passe fourni
+                    // Comparer le mot de passe de la base de donnï¿½es avec l'ancien mot de passe fourni
                     return ancienMotDePasse.equals(motDePasseBD);
                 } else {
-                    System.out.println("Aucun utilisateur trouvé dans la base de données.");
+                    System.out.println("Aucun utilisateur trouvï¿½ dans la base de donnÃ©es.");
                     return false;
                 }
             }
         } catch (SQLException e) {
-            System.out.println("Erreur lors de la connexion à la base de données pour vérifier l'ancien mot de passe : " + e.getMessage());
+            System.out.println("Erreur lors de la connexion ï¿½ la base de donnï¿½es pour vï¿½rifier l'ancien mot de passe : " + e.getMessage());
             e.printStackTrace();
             return false;
         }
@@ -97,23 +97,23 @@ public class CompteServlet extends HttpServlet {
         String password = "";
 
         try {
-            System.out.println("Tentative de connexion à la base de données...");
+            System.out.println("Tentative de connexion ï¿½ la base de donnï¿½es...");
             Connection connection = DriverManager.getConnection(connectionStr, username, password);
-            System.out.println("Connexion réussie à la base de données.");
+            System.out.println("Connexion rï¿½ussie ï¿½ la base de donnï¿½es.");
 
-            PreparedStatement statement = connection.prepareStatement("UPDATE compte SET password = ? WHERE user = ?");
+            PreparedStatement statement = connection.prepareStatement("UPDATE conn SET password = ? WHERE user = ?");
             statement.setString(1, nouveauMotDePasse);
             statement.setString(2, "admin"); // Assuming 'admin' is the user for whom password is being updated
             int rowsAffected = statement.executeUpdate();
 
-            System.out.println("Nombre de lignes affectées : " + rowsAffected);
+            System.out.println("Nombre de lignes affectï¿½es : " + rowsAffected);
 
             statement.close();
             connection.close();
 
             return rowsAffected > 0;
         } catch (SQLException e) {
-            System.out.println("Erreur lors de la connexion à la base de données : " + e.getMessage());
+            System.out.println("Erreur lors de la connexion ï¿½ la base de donnï¿½es : " + e.getMessage());
             e.printStackTrace();
             return false;
         }
