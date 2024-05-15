@@ -56,8 +56,10 @@
 <body>
     <div class="container">
         <h1>Finance et Comptabilité</h1>
-        <form action="Finance.jsp" method="GET">
-            <button class="button">Nouveau</button>
+        <form action="Ajout_finance.jsp" method="GET">
+            <button type="submit" class="button">Nouveau</button>
+        </form>        
+        <form action="Finance.jsp" method="POST">
             <input style="margin-left: 800px;" type="text" id="searchField" name="searchField" placeholder="Rechercher...">
             <button type="submit" class="button">Rechercher</button>
             <br><br><br>
