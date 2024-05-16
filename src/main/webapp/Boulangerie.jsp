@@ -113,7 +113,7 @@
                             <td><%= Date_debut %></td>
                             <td><%= Prix %></td>
                             <td><button class="button" onclick="window.location.href='Fiche_boulangerie.jsp?ordre=<%= ordre %>'">Fiche</button></td>
-                            <td><button class="button">Modifier</button></td>
+                            <td><a href="ModifierBoulangerieServlet?ordre=<%= ordre %>" class="button">Modifier</a></td>
                             <td><button class="button" onclick="supprimer('<%= CODE %>')">Supprimer</button></td>
                         </tr>
                 <%  
