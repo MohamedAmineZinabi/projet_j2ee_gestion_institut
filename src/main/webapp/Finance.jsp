@@ -118,7 +118,7 @@
                             <td><%= rs.getString("Date_debut") %></td>
                             <td><%= rs.getDouble("Prix") %></td>
                             <td><button class="button" onclick="window.location.href='Fiche_finance.jsp?ordre=<%= ordre %>'">Fiche</button>
-                            <td><button class="button">Modifier</button></td>
+                            <td><a href="ModifierFinanceServlet?ordre=<%= ordre %>" class="button">Modifier</a></td>
                             <td><button class="button" onclick="supprimer('<%= rs.getString("CODE") %>')">Supprimer</button></td>
                         </tr>
                 <%  
@@ -137,6 +137,7 @@
         <p id="errorMessage">Échec de la récupération des données.</p>
     </div>
     <script>
+    
     function supprimer(code) {
         const xhr = new XMLHttpRequest();
         const url = '/Gestion_de_cours_soutien/FinanceDeleteServlet'; // URL de votre servlet
