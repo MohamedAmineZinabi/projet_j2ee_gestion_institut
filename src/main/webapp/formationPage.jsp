@@ -41,7 +41,7 @@
 <body>
 
     <div class="section">
-        <h1>Formation professionnelle</h1>
+        <h1>Formation Professionnelle</h1>
         <% 
             List<String> courseTitles1 = Arrays.asList("Finance et Comptabilité", "Boulangerie et Patisserie");
             for (String courseTitle : courseTitles1) {
