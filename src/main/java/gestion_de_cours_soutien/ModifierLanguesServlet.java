@@ -48,7 +48,7 @@ public class ModifierLanguesServlet extends HttpServlet {
             connection = DriverManager.getConnection(url, username, password);
 
             // Query to fetch data based on id
-            String sql = "SELECT CODE, Nom_Complet, Date_inscription, Date_debut, Langue, Prix FROM langues WHERE ordre = ?";
+            String sql = "SELECT CODE, Nom_Complet, Date_inscription, Date_debut, langue, Prix FROM langues WHERE ordre = ?";
             pstmt = connection.prepareStatement(sql);
             pstmt.setInt(1, ordre);
             rs = pstmt.executeQuery();
@@ -107,7 +107,7 @@ public class ModifierLanguesServlet extends HttpServlet {
             connection = DriverManager.getConnection(url, username, password);
 
             // Update query to modify language data
-            String sql = "UPDATE langues SET CODE=?, Nom_Complet=?, Date_inscription=?, Date_debut=?, Langue=?, Prix=? WHERE ordre=?";
+            String sql = "UPDATE langues SET CODE=?, Nom_Complet=?, Date_inscription=?, Date_debut=?, langue=?, Prix=? WHERE ordre=?";
             pstmt = connection.prepareStatement(sql);
             pstmt.setString(1, code);
             pstmt.setString(2, nomComplet);
