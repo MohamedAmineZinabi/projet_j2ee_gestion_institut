@@ -80,7 +80,7 @@
                 connection = DriverManager.getConnection(url, username, password);
                 
                 // Query to fetch data based on id
-                String sql = "SELECT CODE, Nom_Complet, Date_inscription, Date_debut, Langue, Prix FROM langues WHERE ordre = ?";
+                String sql = "SELECT CODE, Nom_Complet, Date_inscription, Date_debut, langue, Prix FROM langues WHERE ordre = ?";
                 pstmt = connection.prepareStatement(sql);
                 pstmt.setInt(1, Integer.parseInt(request.getParameter("ordre")));
                 rs = pstmt.executeQuery();
@@ -91,7 +91,7 @@
                     String nomComplet = rs.getString("Nom_Complet");
                     String dateInscription = rs.getString("Date_inscription");
                     String dateDebut = rs.getString("Date_debut");
-                    String langue = rs.getString("Langue");
+                    String langue = rs.getString("langue");
                     double prix = rs.getDouble("Prix");
         %>
                     <form action="ModifierLanguesServlet" method="post" onsubmit="displaySuccessMessage()">
