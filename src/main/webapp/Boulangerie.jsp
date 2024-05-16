@@ -59,7 +59,7 @@
         <h1> Boulangerie</h1>
         <form action="Ajout_boulangerie.jsp" method="POST">
             <button type="submit" class="button">Nouveau</button>
-            <input type="text" id="searchField" name="searchField" placeholder="Rechercher...">
+            <input style="margin-left: 800px;" type="text" id="searchField" name="searchField" placeholder="Rechercher...">
             <button type="submit" class="button">Rechercher</button>
         </form>
         <br><br>
