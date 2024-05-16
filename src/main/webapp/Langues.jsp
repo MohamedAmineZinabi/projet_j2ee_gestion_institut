@@ -111,7 +111,7 @@
                             <td><%= rs.getString("langue") %></td>
                             <td><%= rs.getDouble("Prix") %></td>
                             <td><button class="button" onclick="window.location.href='Fiche_langues.jsp?ordre=<%= ordre %>'">Fiche</button></td>
-                            <td><button class="button">Modifier</button></td>
+                            <td><a href="ModifierLanguesServlet?ordre=<%= ordre %>" class="button">Modifier</a></td>
                             <td><button class="button" onclick="supprimer('<%= rs.getString("CODE") %>')">Supprimer</button></td>
                         </tr>
                 <%  
