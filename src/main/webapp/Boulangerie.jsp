@@ -59,11 +59,13 @@
         <h1> Boulangerie</h1>
         <form action="Ajout_boulangerie.jsp" method="POST">
             <button type="submit" class="button">Nouveau</button>
+        </form>
+        <form action="Boulangerie.jsp" method="POST">
             <input style="margin-left: 800px;" type="text" id="searchField" name="searchField" placeholder="Rechercher...">
             <button type="submit" class="button">Rechercher</button>
         </form>
         <br><br>
-        
+
         <table id="financeTable">
             <thead>
                 <tr>
@@ -83,23 +85,18 @@
                     try {
                         Class.forName("com.mysql.cj.jdbc.Driver");
                         Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/sfe", "root", "");
-
                         String searchTerm = request.getParameter("searchField");
                         String sql = "SELECT ordre, CODE, Nom_Complet, Date_inscription, Date_debut, Prix FROM boulangerie ";
-
                         if (searchTerm != null && !searchTerm.isEmpty()) {
                             sql += "WHERE Nom_Complet LIKE ?";
                         }
                         
                         sql += " ORDER BY ordre";
                         PreparedStatement pstmt = conn.prepareStatement(sql);
-
                         if (searchTerm != null && !searchTerm.isEmpty()) {
                             pstmt.setString(1, "%" + searchTerm + "%");
                         }
-
                         ResultSet rs = pstmt.executeQuery();
-
                         while (rs.next()) {
                             int ordre = rs.getInt("ordre");
                             String CODE = rs.getString("CODE");
@@ -115,7 +112,7 @@
                             <td><%= Date_inscription %></td>
                             <td><%= Date_debut %></td>
                             <td><%= Prix %></td>
-                            <td><button class="button" onclick="window.location.href='Fiche_finance.jsp?ordre=<%= ordre %>'">Fiche</button></td>
+                            <td><button class="button" onclick="window.location.href='Fiche_boulangerie.jsp?ordre=<%= ordre %>'">Fiche</button></td>
                             <td><button class="button">Modifier</button></td>
                             <td><button class="button" onclick="supprimer('<%= CODE %>')">Supprimer</button></td>
                         </tr>
@@ -129,7 +126,7 @@
                         e.printStackTrace();
                     }
                 %>
-                
+
             </tbody>
         </table>
     </div>
@@ -137,13 +134,10 @@
         function supprimer(code) {
             const xhr = new XMLHttpRequest();
             const url = '/Gestion_de_cours_soutien/BoulangerieDeleteServlet';
-
             const params = new URLSearchParams();
             params.append('code', code);
-
             xhr.open('POST', url, true);
             xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-
             xhr.onload = function() {
                 if (xhr.status >= 200 && xhr.status < 400) {
                     const response = JSON.parse(xhr.responseText);
@@ -159,11 +153,9 @@
                     console.error('Erreur lors de la requête : ' + xhr.status);
                 }
             };
-
             xhr.onerror = function() {
                 console.error('Erreur de réseau lors de la requête');
             };
-
             xhr.send(params);
         }
     </script>
