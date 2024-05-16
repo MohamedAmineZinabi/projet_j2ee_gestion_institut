@@ -53,11 +53,13 @@
         <h1>Informatique</h1>
 <form action="Ajout_informatique.jsp" method="POST">
     <button type="submit" class="button">Nouveau</button>
+</form>
+<form action="Informatique.jsp" method="POST">
     <input style="margin-left: 800px;" type="text" id="searchField" name="searchField" placeholder="Rechercher...">
     <button type="submit" class="button">Rechercher</button>
     <br><br><br>
 </form>
-        
+
         <table id="financeTable">
             <thead>
                 <tr>
@@ -73,29 +75,24 @@
                 </tr>
             </thead>
             <tbody id="tableBody">
-            
+
                 <%  
                 
                 try {
                     Class.forName("com.mysql.cj.jdbc.Driver");
                     Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/sfe", "root", "");
-
                     String searchTerm = request.getParameter("searchField");
                     String sql = "SELECT ordre, CODE, Nom_Complet, Date_inscription, Date_debut, Prix, septembre, octobre, novembre, decembre, janvier, fevrier, mars, avril, mai, juin, juillet FROM informatique ";
-
                     if (searchTerm != null && !searchTerm.isEmpty()) {
                         sql += "WHERE Nom_Complet LIKE ?";
                     }
                     
                     sql += " ORDER BY ordre";
                     PreparedStatement pstmt = conn.prepareStatement(sql);
-
                     if (searchTerm != null && !searchTerm.isEmpty()) {
                         pstmt.setString(1, "%" + searchTerm + "%");
                     }
-
                     ResultSet rs = pstmt.executeQuery();
-
                     while (rs.next()) {
                     	int ordre = rs.getInt("ordre");
                         String CODE = rs.getString("CODE");
@@ -104,7 +101,7 @@
                         String Date_debut = rs.getString("Date_debut");
                         double Prix = rs.getDouble("Prix");
                 %>
-                
+
                         <tr>
                             <td><%= rs.getInt("ordre") %></td>
                             <td><%= rs.getString("CODE") %></td>
@@ -112,7 +109,7 @@
                             <td><%= rs.getString("Date_inscription") %></td>
                             <td><%= rs.getString("Date_debut") %></td>
                             <td><%= rs.getDouble("Prix") %></td>
-                            <td><button class="button" onclick="window.location.href='Fiche_finance.jsp?ordre=<%= ordre %>'">Fiche</button></td>
+                            <td><button class="button" onclick="window.location.href='Fiche_informatique.jsp?ordre=<%= ordre %>'">Fiche</button></td>
                             <td><button class="button">Modifier</button></td>
                             <td><button class="button" onclick="supprimer('<%= rs.getString("CODE") %>')">Supprimer</button></td>
                         </tr>
@@ -127,7 +124,7 @@
                     e.printStackTrace();
                 }
                 %>
-                
+
             </tbody>
         </table>
     </div>
@@ -136,14 +133,11 @@
         function supprimer(code) {
             const xhr = new XMLHttpRequest();
             const url = '/Gestion_de_cours_soutien/InformatiqueDeleteServlet'; // URL de votre servlet
-
             // Préparer les données à envoyer
             const params = new URLSearchParams();
             params.append('code', code);
-
             xhr.open('POST', url, true);
             xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-
             // Gérer la réponse de la requête
             xhr.onload = function() {
                 if (xhr.status >= 200 && xhr.status < 400) {
@@ -163,13 +157,11 @@
                     // Afficher un message d'erreur général en cas d'échec de la requête
                 }
             };
-
             // Gérer les erreurs réseau
             xhr.onerror = function() {
                 console.error('Erreur de réseau lors de la requête');
                 // Afficher un message d'erreur en cas d'échec de la requête réseau
             };
-
             // Envoyer la requête avec les paramètres
             xhr.send(params);
         }
