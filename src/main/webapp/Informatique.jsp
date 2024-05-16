@@ -110,7 +110,7 @@
                             <td><%= rs.getString("Date_debut") %></td>
                             <td><%= rs.getDouble("Prix") %></td>
                             <td><button class="button" onclick="window.location.href='Fiche_informatique.jsp?ordre=<%= ordre %>'">Fiche</button></td>
-                            <td><button class="button">Modifier</button></td>
+                            <td><a href="ModifierInformatiqueServlet?ordre=<%= ordre %>" class="button">Modifier</a></td>
                             <td><button class="button" onclick="supprimer('<%= rs.getString("CODE") %>')">Supprimer</button></td>
                         </tr>
                 <%  
